@@ -24,7 +24,6 @@ context("Test parsers", function()
         assert_not_nil(r.response)
     end)
     test("dom parser", function()
-        if (true) then return end
         local r = dom_parser(XML)
         assert_type(r, 'table')
         local status = r.status

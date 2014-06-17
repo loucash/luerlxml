@@ -58,13 +58,10 @@ call_lua_function(LuaState0, Function, Args) ->
     Status = proplists:get_value(<<"status">>, ReturnVal),
     case Status of
         <<"ok">> ->
-            Response = proplists:get_value(<<"response">>, ReturnVal),
-            {ok, Response};
-        <<"warning">> ->
-            Response = proplists:get_value(<<"response">>, ReturnVal),
-            Warnings1 = proplists:get_value(<<"warnings">>, ReturnVal),
-            Warnings2 = lua_to_erlang_list(Warnings1),
-            {ok, {Response, Warnings2}};
+            Response1 = proplists:get_value(<<"response">>, ReturnVal),
+            Response2 = float_values_to_int(Response1),
+            Response3 = lua_to_erlang_list(Response2),
+            {ok, Response3};
         <<"error">> ->
             Errors1 = proplists:get_value(<<"errors">>, ReturnVal),
             Errors2 = float_values_to_int(Errors1),

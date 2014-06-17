@@ -281,14 +281,14 @@ end
 function domHandler()
     local obj = {}
     obj.options = {commentNode=1,piNode=1,dtdNode=1,declNode=1}
-    obj.root = { _children = {}, _type = "ROOT" }
+    obj.root = { _children = {n=0}, _type = "ROOT" }
     obj.current = obj.root
     obj.starttag = function(self,t,a)
             local node = { _type = 'ELEMENT',
                            _name = t,
                            _attr = a,
                            _parent = self.current,
-                           _children = {} }
+                           _children = {n=0} }
             table.insert(self.current._children,node)
             self.current = node
     end

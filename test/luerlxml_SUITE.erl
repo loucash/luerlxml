@@ -5,7 +5,8 @@
 
 all() ->
     [
-     t_dom_parser
+     t_dom_parser,
+     t_simple_tree_parser
     ].
 
 -define(XML, <<"<a>1</a>">>).
@@ -25,6 +26,13 @@ end_per_suite(_Config) ->
 %% tests
 %% ===================================================================
 t_dom_parser(_Config) ->
-    {ok, Dom} = luerlxml:dom_parser(?XML),
-    ct:pal("~p~n", [Dom]),
+    {ok, [{<<"_children">>,
+           [[{<<"_children">>,[[{<<"_text">>,<<"1">>},{<<"_type">>,<<"TEXT">>}]]},
+             {<<"_name">>,<<"a">>},
+             {<<"_type">>,<<"ELEMENT">>}]]},
+          {<<"_type">>,<<"ROOT">>}]} = luerlxml:dom_parser(?XML),
+    ok.
+
+t_simple_tree_parser(_Config) ->
+    {ok, [{<<"a">>,<<"1">>}]} = luerlxml:simple_tree_parser(?XML),
     ok.

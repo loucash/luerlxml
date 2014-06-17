@@ -1,7 +1,7 @@
 PROJECT := luerlxml
 
 ERL := erl
-EPATH = -pa ebin -pz deps/*/ebin
+EPATH = -pa ../$(PROJECT)/ebin -pz deps/*/ebin
 TEST_EPATH = -pa .eunit -pz deps/*/ebin
 PLT_APPS = $(shell ls $(ERL_LIB_DIR) | grep -v interface | sed -e 's/-[0-9.]*//')
 DIALYZER_OPTS= -Wno_undefined_callbacks --fullpath

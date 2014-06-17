@@ -186,7 +186,6 @@ xmlParser1 = function(handler)
         while match do
             -- Get next tag (first pass - fix exceptions below)
             match,endmatch,text,endt1,tagstr,endt2 = string.find(str,self._XML,pos)
-            print(str, self._XML, pos, match, endmatch, text, endt1, tagstr, endt2)
             if not match then
                 if string.find(str, self._WS,pos) then
                     -- No more text - check document complete
@@ -421,7 +420,6 @@ xmlParser1 = function(handler)
         if self.options.expandEntities then
             --for k,v in self._ENTITIES do
             for k,v in pairs(self._ENTITIES) do
-                --print (k, v)
                 s = string.gsub(s,k,v)
             end
         end
